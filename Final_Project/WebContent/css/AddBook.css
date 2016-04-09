@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+#addBox{
+	margin:150px auto 300px auto ;
+	width:810px;
+	min-height:200px;
+	left:0px;
+	right:0px;
+	position:relative;
+	background:#F4F1EA;
+	border:1px solid #000000;
+	border-radius:0px 0px 10px 10px;
+	padding:5px;
+}
