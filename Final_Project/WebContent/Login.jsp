@@ -12,7 +12,13 @@
 </head>
 
 <body>
-<%request.getSession().invalidate(); %>
+
+<%if (request.getSession().getAttribute("user") != null) {
+//request.getSession().invalidate();} 
+request.getSession().removeAttribute("user");
+}
+%>
+
 
 <div id="searchBar">
 	<div>

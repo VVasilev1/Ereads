@@ -11,4 +11,5 @@ public interface IUserDao {
 	boolean checkEmail (String email) throws SQLException;
 	void registerUser(String firstName, String lastName, String email, String password) throws SQLException;
 	void changeProfileImage(String path, String email) throws SQLException;
+	User getUser (String image) throws SQLException;
 }

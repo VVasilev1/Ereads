@@ -11,27 +11,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class DisplayPicture
- */
-@WebServlet("/DisplayPicture")
-public class DisplayPicture extends HttpServlet {
+
+@WebServlet("/DisplayPictureInBookInfo")
+public class DisplayPictureInBookInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+   
+   
+//To be deleted
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 response.setContentType("image/jpeg");
+ response.setContentType("image/jpeg");
 		 
-		 String picture = null;
-		 if (request.getSession().getAttribute("user")==null ) {
-			 picture = "java1.jpg";
-		 }else{
-			 User user = (User) request.getSession().getAttribute("user");
-			 picture = user.getProfilePicture();
-		 }
-		 if (request.getParameter("picture") != null) {
-			 picture = request.getParameter("picture");
-		 }
-		
+		 if (request.getParameter("picture") == null) {
+			 System.out.println("WTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFf");
+		 } 
+		 	System.out.println("HEEEEEEEEEEEEEEEEEEEEEEEL" + request.getParameter("picture"));
+ 			String picture =(String) request.getParameter("picture");
 		    ServletOutputStream out;  
 		    out = response.getOutputStream();  
 		   
@@ -53,5 +48,7 @@ public class DisplayPicture extends HttpServlet {
 		    
 	}
 
-}
 	
+	
+
+}

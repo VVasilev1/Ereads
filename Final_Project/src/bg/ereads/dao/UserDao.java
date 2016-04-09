@@ -96,6 +96,18 @@ public class UserDao implements IUserDao {
 		ps.executeUpdate();		
 		
 		
+	}
+	@Override
+	public User getUser(String image) throws SQLException {
+		Connection conn = DBConnection.getInstance().getConn();
+		PreparedStatement ps = conn.prepareStatement("SELECT * from user WHERE ProfileImage=?");
+		ps.setString(1, image);
+		ResultSet result = ps.executeQuery();
+		if(result.next() == false){
+			return new User();
+		}
+		
+		return new User(result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6));
 	}	
 	
 }

@@ -11,30 +11,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class DisplayPicture
- */
-@WebServlet("/DisplayPicture")
-public class DisplayPicture extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
+@WebServlet("/DisplayPersonPicture")
+public class DisplayPersonPicture extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 response.setContentType("image/jpeg");
+ response.setContentType("image/jpeg");
 		 
 		 String picture = null;
-		 if (request.getSession().getAttribute("user")==null ) {
+		 if (request.getSession().getAttribute("personPicture")==null) {
 			 picture = "java1.jpg";
 		 }else{
-			 User user = (User) request.getSession().getAttribute("user");
+			 User user = (User) request.getSession().getAttribute("personPicture");
 			 picture = user.getProfilePicture();
 		 }
-		 if (request.getParameter("picture") != null) {
-			 picture = request.getParameter("picture");
-		 }
-		
 		    ServletOutputStream out;  
 		    out = response.getOutputStream();  
-		   
+		   System.out.println("im here" + picture);
 		    FileInputStream fin = new FileInputStream("E:\\ProjectFiles\\profile_images\\" + picture);
 		    System.out.println(picture);
 		      
@@ -50,8 +45,8 @@ public class DisplayPicture extends HttpServlet {
 		    fin.close();  
 		    bout.close();  
 		    out.close();  
-		    
 	}
 
-}
 	
+
+}

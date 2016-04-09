@@ -69,10 +69,10 @@ response.setDateHeader("Expires", -1);
         </form>
     </div>
 	<div>
-		<a href="/Profile2.jsp">Profile </a>
+		<a href="./Profile2.jsp">Profile </a>
 	</div>
 	<div>
-		<a href="/BooksByGenre.jsp">Books</a>
+		<a href="./BooksByGenre.jsp">Books</a>
 	</div>
 	<div>
 	<%
@@ -115,10 +115,10 @@ response.setDateHeader("Expires", -1);
             	                	"<input type='submit' value='Add rating'>"+
             	                "</form>"+
             			 
-            			 "<form name='review' action='."+"//"+"AddReview' method='post'>"+
-            				"<label>Review</label><br/>" +
+            			 "<form name='review' action='."+"/"+"AddReview' method='post'>"+
+            				"<label>Comment</label><br/>" +
          					"<textarea name='review' cols='100' rows='5' required></textarea><br />"+
-             				"<input type='submit' value='Add review'><br>"+
+             				"<input type='submit' value='Add comment'><br>"+
  						"</form>");
             }
             	%>
@@ -132,9 +132,9 @@ response.setDateHeader("Expires", -1);
 	<span>
 	<%for(Review review : reviews){
 	out.println(
-			"<img src='./DisplayPicture?picture=" + review.getPicture() + " 'width='50' height='50'>" +
+			"<a href='./GetUser?image="+review.getPicture()+"'><img src='./DisplayPicture?picture=" + review.getPicture() + " 'width='50' height='50'>" +
 			review.getName() + " :" +
-			review.getComment() + "<br>");
+			review.getComment() + "<br> </a>");
 	}
 	%>
 	</span>

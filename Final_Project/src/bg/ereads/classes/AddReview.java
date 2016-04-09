@@ -32,7 +32,12 @@ public class AddReview extends HttpServlet {
 			dao.reviewBook(title, author, review, mail);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("./BookInfo.jsp");
 			request.setAttribute("success", "Added new review!");
-			dispatcher.forward(request, response);
+			 request.getSession().invalidate();
+		    request.getSession().setAttribute("user",user);
+		    request.getSession().setAttribute("book",book);
+		    response.sendRedirect("./ShowComments");
+			
+			//dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

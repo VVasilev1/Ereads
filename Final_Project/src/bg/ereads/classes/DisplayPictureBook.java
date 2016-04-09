@@ -20,9 +20,7 @@ public class DisplayPictureBook extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("picture") == null) {
-			System.out.println("picture is null");
-		}
+		
 		String picture =(String) request.getParameter("picture");
 		System.out.println("tag");
 	 	System.out.println("Here" + request.getParameter("picture")+ "There");
