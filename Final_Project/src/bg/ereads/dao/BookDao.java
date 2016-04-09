@@ -186,12 +186,16 @@ public class BookDao implements IBookDao{
 	public void reviewBook(String title, String author, String review, String mail) throws SQLException {
 		Connection conn = DBConnection.getInstance().getConn();
 		int idUser = 0;
+		String name = null;
+		String profileImage = null;
 		int idBook = 0;
-		PreparedStatement ps = conn.prepareStatement("SELECT idUser FROM user WHERE Email = ?;");
+		PreparedStatement ps = conn.prepareStatement("SELECT idUser, FirstName, ProfileImage FROM user WHERE Email = ?;");
 		ps.setString(1, mail);
 		ResultSet rs = ps.executeQuery();
 		if(rs.next()){
 			idUser = rs.getInt("idUser");
+			name = rs.getString("FirstName");
+			profileImage = rs.getString("ProfileImage");
 		}
 		PreparedStatement ps1 = conn.prepareStatement("SELECT idBook FROM book WHERE Name = ? AND Autor = ?;");
 		ps1.setString(1, title);
@@ -200,10 +204,12 @@ public class BookDao implements IBookDao{
 		if(rs.next()){
 			idBook = rs.getInt("idBook");
 		}
-		PreparedStatement ps2 = conn.prepareStatement("INSERT INTO reviews VALUES(null, ?, ?, ?);");
+		PreparedStatement ps2 = conn.prepareStatement("INSERT INTO reviews VALUES(null, ?, ?, ?, ?, ?);");
 		ps2.setString(1, review);
 		ps2.setInt(2, idUser);
 		ps2.setInt(3, idBook);
+		ps2.setString(4, name);
+		ps2.setString(5, profileImage);
 		ps2.executeUpdate();
 	}
 

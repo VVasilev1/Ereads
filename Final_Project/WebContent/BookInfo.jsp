@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="bg.ereads.classes.User" import="bg.ereads.classes.Book"
-import="java.text.DecimalFormat" import="java.util.ArrayList"%>
+import="java.text.DecimalFormat" import="java.util.ArrayList" import="bg.ereads.classes.Review"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,12 +32,12 @@ if (book == null) {
 	System.out.println("hi");
 }
 
-ArrayList<String> reviews = null;
+ArrayList<Review> reviews = null;
 if (request.getSession().getAttribute("reviews") == null) {
 	System.out.println("prazno e");
- reviews = new ArrayList<String>();
+ reviews = new ArrayList<Review>();
 } else {
-	reviews = (ArrayList<String>) request.getSession().getAttribute("reviews");
+	reviews = (ArrayList<Review>) request.getSession().getAttribute("reviews");
 }
 
 DecimalFormat dRating = new DecimalFormat("#.0");
@@ -130,8 +130,11 @@ response.setDateHeader("Expires", -1);
             <div id="Reviews">
 <h2>Comments</h2>
 	<span>
-	<%for(String review : reviews){
-	out.println(review + "<br>");
+	<%for(Review review : reviews){
+	out.println(
+			"<img src='./DisplayPicture?picture=" + review.getPicture() + " 'width='50' height='50'>" +
+			review.getName() + " :" +
+			review.getComment() + "<br>");
 	}
 	%>
 	</span>

@@ -24,7 +24,7 @@ public class ShowComments extends HttpServlet {
 		
 		Book book = (Book) request.getSession().getAttribute("book");
 		IReviewDao dao = new ReviewDao();
-		List<String> reviews = null;
+		List<Review> reviews = null;
 		try {
 			 reviews = dao.getReviews(book.getName(), book.getAutor());
 			 request.getSession().setAttribute("reviews", reviews);
