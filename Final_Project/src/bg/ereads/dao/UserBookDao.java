@@ -46,8 +46,9 @@ public class UserBookDao implements IUserBookDao{
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM user_book WHERE idUser=?;");
 		ps.setInt(1, idUser);
 		rs1= ps.executeQuery();
-		Book book = new Book();
+		//Book book = new Book();
 		while(rs1.next()) {
+			Book book = new Book();
 			book.setName(rs1.getString("title"));
 			book.setAutor(rs1.getString("author"));
 			book.setImage(rs1.getString("picture"));

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -93,6 +94,15 @@ public class AddBook extends HttpServlet {
 				dao1.bookAddedToUser(email, title, author, fileName);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");
 				request.setAttribute("success", "The book is added!");
+				ArrayList<Book> userBooks = (ArrayList<Book>)request.getSession().getAttribute("userBooks");
+				userBooks.add(book);
+				ArrayList<String> photos = (ArrayList<String>) request.getSession().getAttribute("photos");
+				request.getSession().invalidate();
+				 request.getSession().setAttribute("user",user);
+				    request.getSession().setAttribute("photos", photos);
+				    request.getSession().setAttribute("userBooks", userBooks);
+				
+				
 				dispatcher.forward(request, response);
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");

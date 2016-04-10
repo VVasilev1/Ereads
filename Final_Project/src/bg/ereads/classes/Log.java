@@ -45,6 +45,7 @@ public class Log extends HttpServlet {
 			if (user.geteMail()!=null) {
 			ArrayList<String> pictures = dao2.photos(email);
 			ArrayList<Book> books = dao3.bookToUser(email);
+			System.out.println(books+ "HEREEE");
 			request.getSession().setAttribute("photos", pictures);
 			request.getSession().setAttribute("userBooks", books);
 			request.getSession().setAttribute("user", user);
