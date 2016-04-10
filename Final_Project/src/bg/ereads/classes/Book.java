@@ -19,7 +19,7 @@ public class Book {
 		if(this.getNumberOfVotes()==0 && this.getSumOfVotes()==0){
 			rating =1;
 		}else{
-			rating = ((double)this.getNumberOfVotes())/this.getSumOfVotes();
+			rating = ((double)this.getSumOfVotes())/this.getNumberOfVotes();
 		}
 		return rating;
 	}
@@ -88,8 +88,9 @@ public class Book {
 		this.genre = genre;
 		this.linkToBuy = linkToBuy;
 	}
+	
 	public Book() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	

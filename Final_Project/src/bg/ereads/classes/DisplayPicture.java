@@ -23,7 +23,7 @@ public class DisplayPicture extends HttpServlet {
 		 
 		 String picture = null;
 		 if (request.getSession().getAttribute("user")==null ) {
-			 picture = "java1.jpg";
+			 picture = "default.jpg";
 		 }else{
 			 User user = (User) request.getSession().getAttribute("user");
 			 picture = user.getProfilePicture();

@@ -3,19 +3,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>eReads</title>
 <link rel="stylesheet" type= "text/css" href="css/main.css">
 </head>
 <body>
+
 <% 
-User user = null;
-if(session.getAttribute("user") == null) { 
-	user = new User();
-	user.setFirstName("Profile");
-} else {
-	user = (User) session.getAttribute("user");
-}
-%> 
+	User user = null;
+	if(session.getAttribute("user") == null) { 
+		user = new User();
+		user.setFirstName("Profile");
+	} else {
+		user = (User) session.getAttribute("user");
+	}
+%>
+
 <div id="searchBar">
 	<div>
 		<img src= "Logo.jpg" width="120px" height = "60px"> 
@@ -24,19 +26,19 @@ if(session.getAttribute("user") == null) {
 		<h1>GoodBook</h1>
 	</div>
 	<div>
-        <form action="./Search" method="get">
-            <input type="text" value="" name = "search" style="width:250px;"/><br />
-
-            <label>
-                <input type="radio" name="radio" value="name" checked="checked">Name
-            </label>
-            <label>
-                <input type="radio" name="radio" value="author">Author
-            </label>		
-            <label>
-                <input type="radio" name="radio" value="genre">Genre
-            </label>		
-        </form>
+		<form action="./Search" method="get">
+		    <input type="text" value="" name = "search" style="width:250px;"/><br />
+		
+		    <label>
+		        <input type="radio" name="radio" value="name" checked="checked">Name
+		    </label>
+		    <label>
+		        <input type="radio" name="radio" value="author">Author
+		    </label>		
+		    <label>
+		        <input type="radio" name="radio" value="genre">Genre
+		    </label>		
+		</form>
     </div>
 	<div>
 		<a href="Register.jsp">Register</a>
@@ -45,5 +47,6 @@ if(session.getAttribute("user") == null) {
 		<a href="Login.jsp">Login</a>
 	</div>
 </div>
+
 </body>
 </html>

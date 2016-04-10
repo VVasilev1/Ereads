@@ -6,7 +6,7 @@ import="bg.ereads.classes.User"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
-<title>Insert title s</title>
+<title>eReads.Search</title>
 <link rel="stylesheet" type= "text/css" href="css/Profile.css">
 <link rel="stylesheet" type= "text/css" href="css/main.css">
 <style type="text/css">
@@ -53,27 +53,23 @@ import="bg.ereads.classes.User"%>
 </head>
 <body>
 <%
-   response.setHeader( "Pragma", "no-cache" );
-   response.setHeader( "Cache-Control", "no-cache" );
-   response.setDateHeader( "Expires", 0 );
-%>
-<% 
-User user= null;
-if (request.getSession(false).getAttribute("user") == null) { 
-	user = new User();
-	user.setFirstName("Profile");
-} else {
-	user = (User) request.getSession(false).getAttribute("user");
-}
-%>
-<% ArrayList<Book> books = null;
-if (request.getSession().getAttribute("books") == null) {
- books = (ArrayList<Book>) request.getAttribute("Search");
-} else {
-	books = (ArrayList<Book>) request.getSession().getAttribute("books");
-}
-request.getSession().setAttribute("books", books);
-
+	response.setHeader( "Pragma", "no-cache" );
+	response.setHeader( "Cache-Control", "no-cache" );
+	response.setDateHeader( "Expires", 0 );
+	User user= null;
+	if (request.getSession(false).getAttribute("user") == null) { 
+		user = new User();
+		user.setFirstName("Profile");
+	} else {
+		user = (User) request.getSession(false).getAttribute("user");
+	}
+	ArrayList<Book> books = null;
+	if (request.getSession().getAttribute("books") == null) {
+ 		books = (ArrayList<Book>) request.getAttribute("Search");
+	} else {
+		books = (ArrayList<Book>) request.getSession().getAttribute("books");
+	}
+	request.getSession().setAttribute("books", books);
 %>
 
 <div id="searchBar">
@@ -85,8 +81,8 @@ request.getSession().setAttribute("books", books);
 	</div>
 	<div>
         <form action="./Search" method="get">
-            <input type="text"  name = "search" style="width:250px;" value=<%=request.getAttribute("searchword") %>><br />
-
+            <input type="text"  name = "search" style="width:250px;" value="">
+            <br>
             <label>
                 <input type="radio" name="radio" value="name" checked="checked"
                 >Name
@@ -102,79 +98,77 @@ request.getSession().setAttribute("books", books);
         </form>
     </div>
     <div> 
-    <div action="./DisplayPicture" method="get">
-        	<img src="./DisplayPicture" width="30" height="30"><br>
+    	<div action="./DisplayPicture" method="get">
+        	<img src="./DisplayPicture" width="30" height="30">
+        	<br>
         </div>
     </div>
 	<div>
-		<a href="Profile2.jsp"><%=user.getFirstName() %> </a>
+		<a href="Profile2.jsp"><%=user.getFirstName()%></a>
 	</div>
 	<div>
 		<a href="BooksByGenre.jsp">Books</a>
 	</div>
 	<div>
-		<a href="Login.jsp"><% if(request.getSession(false).getAttribute("user") != null) {
-			out.println("Log Out");
-		} 
-		else {
-			out.println("Log in");
-		}
-			%>
+		<a href="Login.jsp">
+		<%
+			if(request.getSession(false).getAttribute("user") != null) {
+				out.println("Log Out");
+			} 
+			else {
+				out.println("Log in");
+			}
+		%>
 		</a>
 	</div>
 </div>
-	
-
 
 <div id="sort">
-
-<form action="./Sort" method="get">  
-	<input type="radio" name="radio" value="accending" checked="checked">Ascending
-	<input type="radio" name="radio" value="descending">Descending
-	<input type="submit" value="Sort" class="submitButton"/><br />
-
-</form>
-	
-
-
+	<form action="./Sort" method="get">  
+		<input type="radio" name="radio" value="accending" checked="checked">Ascending
+		<input type="radio" name="radio" value="descending">Descending
+		<input type="submit" value="Sort" class="submitButton"/>
+		<br>
+	</form>
 </div>
-
-
-
 
 <div id="searchBox">
 	<h2>Result</h2>
 	<%
-	for (Book k : books) {
+		for (Book k : books) {
 		double rating = ((double)k.getNumberOfVotes())/k.getSumOfVotes();
 		DecimalFormat dRating = new DecimalFormat("#.0");
 	%>
     <div>
-<div ><%System.out.println(k.getImage()); %>
-        	<img src="./DisplayPictureBook?picture=<%=k.getImage() %> "width="50" height="50"><br>
-        	
+		<div><%System.out.println(k.getImage());%>
+        	<img src="./DisplayPictureBook?picture=<%=k.getImage()%> "width="50" height="50">
+        	<br>
         </div>
         <form>
-       	<span>
-	        <a href="./GetBook?title=<%= k.getName()%>&author=<%= k.getAutor()%>"><h3><%=k.getName()%></h3></a><br>
-	        	<h4><%=k.getAutor() %></h4><br>
-	        	<h4><%=k.getGenre() %></h4><br>
-	    </span>
+	       	<span>
+		        <a href="./GetBook?title=<%= k.getName()%>&author=<%= k.getAutor()%>"><h3><%=k.getName()%></h3></a>
+		        <br>
+		        <h4><%=k.getAutor() %></h4>
+		        <br>
+		        <h4><%=k.getGenre() %></h4>
+		        <br>
+		    </span>
         </form>
     </div>
     <%
-    
-    }
-	
+    	}
    	%>
+   	<!--
     <span>
     	Page
     	<a href="Search.jsp?pageNumber=1">1</a>
     	<a href="Search.jsp?pageNumber=2">2</a>
     </span>
+    -->
 </div>
-	
+
 <div id="footer">
 </div>
+
 </body>
 </html>

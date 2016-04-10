@@ -23,20 +23,20 @@
 </style>
 </head>
 <body>
-<% 
-User user = null;
-if (request.getSession(false).getAttribute("user") == null) { 
-	user = new User();
-	user.setFirstName("Profile");
-} else {
 
-user = (User) request.getSession(false).getAttribute("user");
-}
-response.setHeader("Pragma", "No-cache");
-response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-response.setDateHeader("Expires", -1);
+<%
+	User user = null;
+	if (request.getSession(false).getAttribute("user") == null) { 
+		user = new User();
+		user.setFirstName("Profile");
+	} else {
+	
+	user = (User) request.getSession(false).getAttribute("user");
+	}
+	response.setHeader("Pragma", "No-cache");
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setDateHeader("Expires", -1);
 %>
-
 
 <div id="searchBar">
 	<div>
@@ -46,38 +46,37 @@ response.setDateHeader("Expires", -1);
 		<h1>GoodBook</h1>
 	</div>
 	<div>
-        <form action="./Search" method="get">
-            <input type="text"  name = "search" style="width:250px;" value=""/><br />
-            <label>
-                <input type="radio" name="radio" value="name" checked="checked">Name
-            </label>
-            <label>
-                <input type="radio" name="radio" value="author">Author
-            </label>		
-            <label>
-                <input type="radio" name="radio" value="genre">Genre
-            </label>		
-        </form>
-    </div>
-	<div>
-		<a href="Profile2.jsp"><%=user.getFirstName()%> </a>
+		<form action="./Search" method="get">
+			<input type="text"  name = "search" style="width:250px;" value=""/><br>
+			<label>
+			    <input type="radio" name="radio" value="name" checked="checked">Name
+			</label>
+			<label>
+			    <input type="radio" name="radio" value="author">Author
+			</label>		
+			<label>
+			    <input type="radio" name="radio" value="genre">Genre
+			</label>		
+		</form>
 	</div>
 	<div>
-		<a href="BooksByGenre">Books</a>
+		<a href="Profile2.jsp"><%=user.getFirstName()%></a>
+	</div>
+	<div>
+		<a href="BooksByGenre.jsp">Books</a>
 	</div>
 	<div>
 		<%
-		String log = null;
-		if(user.getFirstName().equals("Profile")) {
-			log = "Login";
-		}else{
-			log = "Logout";
-		}
+			String log = null;
+			if(user.getFirstName().equals("Profile")) {
+				log = "Login";
+			}else{
+				log = "Logout";
+			}
 		%>
 		<a href="Login.jsp"><%=log%></a>
 	</div>
 </div>
-	
 
 <div id="searchBox">
 	<h2>Categories</h2>
@@ -99,8 +98,6 @@ response.setDateHeader("Expires", -1);
     </form>
     </div>
 </div>
-	
-<div id="footer">
-</div>
+
 </body>
 </html>

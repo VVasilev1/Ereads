@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -40,6 +41,8 @@ public class UpdatePicture extends HttpServlet {
         System.out.println(name+"here");
         String contentType = part.getContentType();
         System.out.println(contentType);
+        ArrayList<String> photos = (ArrayList<String>) request.getSession().getAttribute("photos");
+		ArrayList<Book> userBooks = (ArrayList<Book>)request.getSession().getAttribute("userBooks");
         if(!contentType.contains("image") ) {
             out.println("Only png format supported!");
             
@@ -74,6 +77,8 @@ public class UpdatePicture extends HttpServlet {
 	       s.setProfilePicture(fileName);
 	       request.getSession().invalidate();
 	       request.getSession().setAttribute("user",s);
+	       request.getSession().setAttribute("photos", photos);
+		    request.getSession().setAttribute("userBooks", userBooks);
 	        
 	        fos.close();
 	        response.sendRedirect("Profile2.jsp");

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -28,6 +29,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import bg.ereads.dao.BookDao;
 import bg.ereads.dao.IBookDao;
+import bg.ereads.dao.IUserBookDao;
+import bg.ereads.dao.UserBookDao;
 
 @WebServlet("/AddBook")
 @MultipartConfig
@@ -38,6 +41,9 @@ public class AddBook extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		IBookDao dao = new BookDao();
+		IUserBookDao dao1 = new UserBookDao();
+		User user = (User) request.getSession().getAttribute("user");
+		String email = user.geteMail();
 		String title = request.getParameter("title");
 		System.out.println(title);
 		String author = request.getParameter("author");
@@ -53,7 +59,6 @@ public class AddBook extends HttpServlet {
             System.out.println(contentType);
             if(!contentType.contains("image") ) {
                 out.println("Only png format supported!");
-                
             } else {
             InputStream is = request.getPart(name).getInputStream();
             
@@ -85,9 +90,14 @@ public class AddBook extends HttpServlet {
 		try {
 			if (dao.checkBook(title, author) == true) {
 				dao.addBook(book);
-				response.sendRedirect("Success.jsp");
+				dao1.bookAddedToUser(email, title, author, fileName);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");
+				request.setAttribute("success", "The book is added!");
+				dispatcher.forward(request, response);
 			} else {
-				response.sendRedirect("Register.html");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");
+				request.setAttribute("invalidAdd", "The book is already added!");
+				dispatcher.forward(request, response);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

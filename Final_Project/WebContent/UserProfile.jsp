@@ -94,16 +94,7 @@ request.setAttribute("personPicture", person.getProfilePicture());
         	
         </div>
     </div>
-	<div style="display:table-row;">
-    	<h3>Readed books.</h3>
-        book 1<br>
-        book 2
-    </div>
-	<div style="display:table-row;">
-    	<h3>Reviewed.</h3>
-        book 1<br>
-        book 2
-    </div>
+	
 </div>
 	
 <div id="footer">

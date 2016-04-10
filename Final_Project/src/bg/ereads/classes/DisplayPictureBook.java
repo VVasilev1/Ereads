@@ -18,40 +18,30 @@ import javax.servlet.http.HttpServletResponse;
 public class DisplayPictureBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String picture =(String) request.getParameter("picture");
 		System.out.println("tag");
 	 	System.out.println("Here" + request.getParameter("picture")+ "There");
 	 	System.out.println("tag");
-		 response.setContentType("image/jpeg");
-		 
-		
-		
-			
-		 	
-		 	
-		
-		    ServletOutputStream out;  
-		    out = response.getOutputStream();  
+		response.setContentType("image/jpeg");
+		ServletOutputStream out;  
+		out = response.getOutputStream();  
 		   
-		    FileInputStream fin = new FileInputStream("E:\\ProjectFiles\\book_images\\" + picture);
-		    System.out.println("here" +picture);
+		FileInputStream fin = new FileInputStream("E:\\ProjectFiles\\book_images\\" + picture);
+		System.out.println("here" +picture);
 		      
-		    BufferedInputStream bin = new BufferedInputStream(fin);  
-		    BufferedOutputStream bout = new BufferedOutputStream(out);  
-		    int ch =0; ;  
-		    while((ch=bin.read())!=-1)  
-		    {  
-		    bout.write(ch);  
-		    }  
+		BufferedInputStream bin = new BufferedInputStream(fin);  
+		BufferedOutputStream bout = new BufferedOutputStream(out);  
+		int ch =0; ;  
+		while((ch=bin.read())!=-1)  {  
+			bout.write(ch);  
+		}  
 		      
-		    bin.close();  
-		    fin.close();  
-		    bout.close();  
-		    out.close();  
-		    
+		bin.close();  
+		fin.close();  
+		bout.close();  
+		out.close();
 	}
 
 }

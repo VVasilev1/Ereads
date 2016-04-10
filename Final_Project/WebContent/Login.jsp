@@ -13,12 +13,12 @@
 
 <body>
 
-<%if (request.getSession().getAttribute("user") != null) {
-//request.getSession().invalidate();} 
-request.getSession().removeAttribute("user");
-}
+<%
+	if (request.getSession().getAttribute("user") != null) {
+		//request.getSession().invalidate();} 
+		request.getSession().removeAttribute("user");
+	}
 %>
-
 
 <div id="searchBar">
 	<div>
@@ -32,18 +32,15 @@ request.getSession().removeAttribute("user");
 	</div>
 </div>
 
-
 <div id="loginBox">
 	<form method="post" action="./Log">
 		<%
-		if (request.getAttribute("errorMessage") != null) {
-			out.println("<p style='color:red'> " +request.getAttribute("errorMessage")+ "</p>");
-		}
-		%>
-		<%
-		if (request.getAttribute("registered") != null){
-			out.println("<p style='color:green'> "+request.getAttribute("registered")+ "</p>");
-		}
+			if (request.getAttribute("errorMessage") != null) {
+				out.println("<p style='color:red'> " +request.getAttribute("errorMessage")+ "</p>");
+			}
+			if (request.getAttribute("registered") != null){
+				out.println("<p style='color:green'> "+request.getAttribute("registered")+ "</p>");
+			}
 		%>
     	<label>Email Address</label>
     	<input name="email" value="" type="text" /><br />
@@ -53,8 +50,8 @@ request.getSession().removeAttribute("user");
 		<a href="Forgotten.html">Forgot password?</a>
 		<p>Don't have an account?!?</p>
 		<a href="Register.jsp" >Register here!</a>
-		
-  </form>
+	</form>
 </div>
+
 </body>
 </html>

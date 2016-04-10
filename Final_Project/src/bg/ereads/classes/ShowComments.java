@@ -29,7 +29,6 @@ public class ShowComments extends HttpServlet {
 			 reviews = dao.getReviews(book.getName(), book.getAutor());
 			 request.getSession().setAttribute("reviews", reviews);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(reviews == null){

@@ -11,8 +11,10 @@ import bg.ereads.classes.Review;
 import bg.ereads.connection.DBConnection;
 
 public class ReviewDao implements IReviewDao{
+	
+	private Connection conn = DBConnection.getInstance().getConn();
+	
 	public List<Review> getReviews(String title, String author) throws SQLException{
-		Connection conn = DBConnection.getInstance().getConn();
 		int idBook = 0;
 		Review review = null;
 		List<Review> reviews = new ArrayList<Review>();

@@ -3,6 +3,7 @@ package bg.ereads.classes;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bg.ereads.dao.IPictureDao;
+import bg.ereads.dao.IUserBookDao;
 import bg.ereads.dao.IUserDao;
+import bg.ereads.dao.PictureDao;
+import bg.ereads.dao.UserBookDao;
 import bg.ereads.dao.UserDao;
 import bg.ereads.exceptions.DBException;
 import bg.ereads.exceptions.InvalidUserException;
@@ -23,23 +28,25 @@ import bg.ereads.exceptions.InvalidUserException;
 public class Log extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
- 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		IUserDao dao = UserDao.getInstance();
+		IPictureDao dao2 = new PictureDao();
+		IUserBookDao dao3 = new UserBookDao();
 		
 		User user;
 		
 		try {
+			
+			
 			user = dao.loginUser(email, password);
 			System.out.println(user.geteMail());
 			if (user.geteMail()!=null) {
+			ArrayList<String> pictures = dao2.photos(email);
+			ArrayList<Book> books = dao3.bookToUser(email);
+			request.getSession().setAttribute("photos", pictures);
+			request.getSession().setAttribute("userBooks", books);
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect("Profile2.jsp");
 			} else {
@@ -52,6 +59,9 @@ public class Log extends HttpServlet {
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
