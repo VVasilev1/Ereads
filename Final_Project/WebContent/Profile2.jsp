@@ -107,31 +107,28 @@ import="bg.ereads.classes.User" import="java.util.ArrayList"%>
 	<div style="display:table-row;">
 	<h3>Uploaded Books</h3>
     	<%
-    	
 		for (Book k : books) {
-		double rating = ((double)k.getNumberOfVotes())/k.getSumOfVotes();
 		%>
-    
-    
+    <div>
 		<div><%System.out.println(k.getImage());%>
         	<a href="./GetBook?title=<%= k.getName()%>&author=<%= k.getAutor()%>"><img src="./DisplayPictureBook?picture=<%=k.getImage()%> "width="50" height="50">
-        	
+        	<br>
         	<%=k.getName()%></a>
         </div>
-  
+    </div>
     <%
     	}
    	%>
     </div>
 	<div id="pictues" style="display:table-row;" >
 	<h3>Photos</h3>
-		<% for(String s: photos) {
+		<%
+		for(String s: photos) {
 		%>
-		
 			<a href ="UserPhotos.jsp"><img  src="./DisplayPicture?picture=<%=s%> "width="50" height="50"> </a>
-	
 		<% 
-		}%>
+		}
+		%>
 	</div>
 </div>
 	

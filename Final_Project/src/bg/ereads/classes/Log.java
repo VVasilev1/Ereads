@@ -2,6 +2,7 @@ package bg.ereads.classes;
 
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.common.hash.Hashing;
 
 import bg.ereads.dao.IPictureDao;
 import bg.ereads.dao.IUserBookDao;
@@ -34,18 +37,14 @@ public class Log extends HttpServlet {
 		IUserDao dao = UserDao.getInstance();
 		IPictureDao dao2 = new PictureDao();
 		IUserBookDao dao3 = new UserBookDao();
-		
+		String hashPassword = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
 		User user;
-		
 		try {
-			
-			
-			user = dao.loginUser(email, password);
+			user = dao.loginUser(email, hashPassword);
 			System.out.println(user.geteMail());
 			if (user.geteMail()!=null) {
 			ArrayList<String> pictures = dao2.photos(email);
 			ArrayList<Book> books = dao3.bookToUser(email);
-			System.out.println(books+ "HEREEE");
 			request.getSession().setAttribute("photos", pictures);
 			request.getSession().setAttribute("userBooks", books);
 			request.getSession().setAttribute("user", user);

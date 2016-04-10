@@ -20,7 +20,6 @@ public class GetBook extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		String title =(String) request.getParameter("title");
 		System.out.println(title);
 		String author =(String) request.getParameter("author");
@@ -29,12 +28,10 @@ public class GetBook extends HttpServlet {
 		String description = request.getParameter("description");
 		String rating = request.getParameter("rating");
 		String image = request.getParameter("image");
-		
 		BookDao dao = new BookDao();
 		Book b = null;
 		try {
 			b = dao.getBook(title, author);
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

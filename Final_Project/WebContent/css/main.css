@@ -11,7 +11,7 @@ html,body {
 #searchBar {
 	position:fixed;
 	background-image:url(../site_images/masthead_background.jpg);
-	background-repeat:no-repeat;
+	background-repeat:repeat;
 	color:#411F00;
 	font-size: 14px;
 	width: 100%;

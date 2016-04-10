@@ -34,6 +34,12 @@ public class Sort extends HttpServlet implements Comparator {
 		if (type.equals("descending")) {
 			Collections.sort(b,new MyComparator());
 		}
+		if (type.equals("accRate")) {
+			Collections.sort(b,new AsendingRating());
+		}
+		if (type.equals("desRate")) {
+			Collections.sort(b,new DescendingRating());
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./Search.jsp");
 		if (dispatcher == null) {

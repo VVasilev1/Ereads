@@ -69,10 +69,12 @@ public class AddPicture extends HttpServlet {
 	        fos.close();
 	        User user = (User) request.getSession().getAttribute("user");
 	        ArrayList<String> photos = (ArrayList<String>) request.getSession().getAttribute("photos");
+	        ArrayList<Book> books = (ArrayList<Book>)request.getSession().getAttribute("userBooks");
 	        photos.add(fileName);
 	        request.getSession().invalidate();
 	        request.getSession().setAttribute("user", user);
 	        request.getSession().setAttribute("photos", photos);
+	        request.getSession().setAttribute("userBooks", books);
 	        response.sendRedirect("Profile2.jsp");
 	       
         }

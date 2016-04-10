@@ -7,8 +7,7 @@
 <title>Log in</title>
 <link rel="stylesheet" type= "text/css" href="css/Login.css">
 <link rel="stylesheet" type= "text/css" href="css/main.css">
-<style type="text/css">
-</style>
+
 </head>
 
 <body>
@@ -47,7 +46,6 @@
     	<label>Password</label>
         <input name="password" value="" type="password" /><br />
         <input type="submit" value="Login" class="submitButton"/><br />
-		<a href="Forgotten.html">Forgot password?</a>
 		<p>Don't have an account?!?</p>
 		<a href="Register.jsp" >Register here!</a>
 	</form>

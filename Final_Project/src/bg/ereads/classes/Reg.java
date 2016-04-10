@@ -1,6 +1,7 @@
 package bg.ereads.classes;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.common.hash.Hashing;
 
 import bg.ereads.dao.UserDao;
 
@@ -27,6 +30,7 @@ public class Reg extends HttpServlet {
 		String lastName = request.getParameter("lastname");
 		String eMail = request.getParameter("email");
 		String password = request.getParameter("password");
+		String hashPassword = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
 		if (password.length() <6) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("./Register.jsp");
 			request.setAttribute("passwordError", "Password must me atleat 6 characters long.");
@@ -36,7 +40,7 @@ public class Reg extends HttpServlet {
 		UserDao dao = new UserDao();
 		try {
 			if (dao.checkEmail(eMail) == true) {
-				dao.registerUser(firstName, lastName, eMail, password);
+				dao.registerUser(firstName, lastName, eMail, hashPassword);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("./Login.jsp");
 				request.setAttribute("registered", "Registration complete. Log in here.");
 				dispatcher.forward(request, response);
@@ -50,5 +54,4 @@ public class Reg extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }

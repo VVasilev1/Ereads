@@ -81,19 +81,27 @@
 <div id="searchBox">
 	<h2>Categories</h2>
 	<div>
-    <form action="./SearchByRadio" method="get">
+    <form action="./SearchByRadio" method="get" style="display:table-row;">
     	<label>
-        	<h3><input type="radio" name="radio" value="fantasy">Fantasy <input type="radio" name="radio" value="action">Action</h3>
+        	<h3><input type="radio" name="radio" value="fantasy">Fantasy<input type="radio" name="radio" value="action">Action<br>
+        	<img  src="./DisplayPicture?picture=Fantasy.jpg "width="135" height="200">
+			<img  src="./DisplayPicture?picture=Action.jpg "width="135" height="200"></h3>
         </label>
         <label>
-        	<h3><input type="radio" name="radio" value="drama">Drama <input type="radio" name="radio" value="graphicNovel">Graphic novel</h3>
+        	<h3><input type="radio" name="radio" value="drama">Drama <input type="radio" name="radio" value="graphicNovel">Graphic novel<br>
+        	<img  src="./DisplayPicture?picture=Drama.jpg "width="135" height="200">
+       		<img  src="./DisplayPicture?picture=GraphicNovel.jpg "width="135" height="200"></h3>
         </label>
     	<label>
-        	<h3><input type="radio" name="radio" value="western">Western<input type="radio" name="radio" value="mystery">Mystery </h3>
+        	<h3><input type="radio" name="radio" value="western">Western<input type="radio" name="radio" value="mystery">Mystery</h3>
+        	<img  src="./DisplayPicture?picture=Western.jpg "width="135" height="200">
+       		<img  src="./DisplayPicture?picture=Mystery.jpg "width="135" height="200"></h3>
         </label>
         <label>
         	<h3><input type="radio" name="radio" value="comedy">Comedy <input type="radio" name="radio" value="education">Education </h3>
-        </label>
+        	<img  src="./DisplayPicture?picture=Comedy.jpg "width="135" height="200">
+       		<img  src="./DisplayPicture?picture=Education.jpg "width="135" height="200"></h3>
+        </label><br>
         <input type="submit" value="Search">
     </form>
     </div>

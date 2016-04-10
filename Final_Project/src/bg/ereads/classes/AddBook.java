@@ -98,11 +98,9 @@ public class AddBook extends HttpServlet {
 				userBooks.add(book);
 				ArrayList<String> photos = (ArrayList<String>) request.getSession().getAttribute("photos");
 				request.getSession().invalidate();
-				 request.getSession().setAttribute("user",user);
-				    request.getSession().setAttribute("photos", photos);
-				    request.getSession().setAttribute("userBooks", userBooks);
-				
-				
+				request.getSession().setAttribute("user",user);
+				request.getSession().setAttribute("photos", photos);
+				request.getSession().setAttribute("userBooks", userBooks);
 				dispatcher.forward(request, response);
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");

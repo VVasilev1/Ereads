@@ -109,7 +109,8 @@ import="java.text.DecimalFormat" import="java.util.ArrayList" import="bg.ereads.
 		Title:<b><%=book.getName() %></b><br>
 		Author:<b><%=book.getAutor() %></b><br>
 		Genre:<b><%=book.getGenre() %></b><br>
-		Description:<b><%=book.getDescription() %></b><br>
+		Buy from:<b><a href=<%=book.getLinkToBuy()%>>Here</a></b><br>
+		Description:<b><%=book.getDescription()%></b><br>
 		Rating:<b><%=dRating.format(book.getRating()) %></b><br>
      	<%
      	if(request.getSession(false).getAttribute("user")!=null) {
@@ -132,7 +133,11 @@ import="java.text.DecimalFormat" import="java.util.ArrayList" import="bg.ereads.
 				"</form>");
 	     }
 	     %>
-	     <div id="Reviews">
+	     
+    </div>
+	</div>
+</div>
+<div id="Reviews">
 			<h2>Comments</h2>
 				<span>
 				<%
@@ -145,10 +150,6 @@ import="java.text.DecimalFormat" import="java.util.ArrayList" import="bg.ereads.
 				%>
 			</span>
 		</div>
-    </div>
-	</div>
-</div>
-
 <div id="footer">
 </div>
 

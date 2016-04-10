@@ -10,6 +10,7 @@ import="bg.ereads.classes.User"%>
 <link rel="stylesheet" type= "text/css" href="css/Profile.css">
 <link rel="stylesheet" type= "text/css" href="css/main.css">
 <style type="text/css">
+
 #sort {
 	position:relative;
 	margin:100px auto 200px auto;
@@ -18,7 +19,7 @@ import="bg.ereads.classes.User"%>
 #searchBox {
 	display:table;
 	margin:150px auto 300px auto ;
-	width:810px;
+	min-width:810px;
 	min-height:200px;
 	left:0px;
 	right:0px;
@@ -35,11 +36,13 @@ import="bg.ereads.classes.User"%>
 	border:1px solid #000;
 	margin:-1px;
 }
-#searchBox div img, #searchBox div span {
+#searchBox div span {
 	display:table-cell;
+	min-width:800px;
 }
 #searchBox div img {
-	width:50px;
+	width:120px;
+	height:200px;
 }
 #searchBox div span {
 	vertical-align:top;
@@ -97,6 +100,16 @@ import="bg.ereads.classes.User"%>
             </label>		
         </form>
     </div>
+    <div id="sort">
+	<form action="./Sort" method="get">  
+		<input type="radio" name="radio" value="accending" checked="checked">Ascending
+		<input type="radio" name="radio" value="descending">Descending
+		<input type="radio" name="radio" value="accRate">Asccending by rating
+		<input type="radio" name="radio" value="desRate">Descending by taring
+		<input type="submit" value="Sort" class="submitButton"/>
+		<br>
+	</form>
+	</div>
     <div> 
     	<div action="./DisplayPicture" method="get">
         	<img src="./DisplayPicture" width="30" height="30">
@@ -123,14 +136,7 @@ import="bg.ereads.classes.User"%>
 	</div>
 </div>
 
-<div id="sort">
-	<form action="./Sort" method="get">  
-		<input type="radio" name="radio" value="accending" checked="checked">Ascending
-		<input type="radio" name="radio" value="descending">Descending
-		<input type="submit" value="Sort" class="submitButton"/>
-		<br>
-	</form>
-</div>
+
 
 <div id="searchBox">
 	<h2>Result</h2>
@@ -142,18 +148,15 @@ import="bg.ereads.classes.User"%>
     <div>
 		<div><%System.out.println(k.getImage());%>
         	<img src="./DisplayPictureBook?picture=<%=k.getImage()%> "width="50" height="50">
-        	<br>
-        </div>
-        <form>
-	       	<span>
+        	<span>
 		        <a href="./GetBook?title=<%= k.getName()%>&author=<%= k.getAutor()%>"><h3><%=k.getName()%></h3></a>
 		        <br>
-		        <h4><%=k.getAutor() %></h4>
+		        <h4>Author: <%=k.getAutor() %></h4>
 		        <br>
-		        <h4><%=k.getGenre() %></h4>
+		        <h4>Genre: <%=k.getGenre() %></h4>
 		        <br>
 		    </span>
-        </form>
+        </div>
     </div>
     <%
     	}

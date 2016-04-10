@@ -235,6 +235,7 @@ public class BookDao implements IBookDao{
 			book.setSumOfVotes(rs.getInt("SumOfVotes"));
 			book.setNumberOfVotes(rs.getInt("NumberOfVotes"));
 			book.setDescription(rs.getString("Description"));
+			book.setLinkToBuy(rs.getString("LinkToBuy"));
 		}
 		return book;
 	}
