@@ -46,71 +46,71 @@ public class AddBook extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		String email = user.geteMail();
 		String title = request.getParameter("title");
-		System.out.println(title);
+
 		String author = request.getParameter("author");
 		String description = request.getParameter("description");
 		String genre = request.getParameter("genre");
 		String linkToBuy = request.getParameter("linkToBuy");
-		PrintWriter out = response.getWriter(); 
+		PrintWriter out = response.getWriter();
 		Part part = request.getPart("image");
 		String fileName = null;
-            String name = part.getName();
-            System.out.println(name+"here");
-            String contentType = part.getContentType();
-            System.out.println(contentType);
-            if(!contentType.contains("image") ) {
-                out.println("Only png format supported!");
-            } else {
-            InputStream is = request.getPart(name).getInputStream();
-            
-            
-             //to implement later(geting path from servlet
-          
-            String contextPath = "E:\\ProjectFiles\\book_images";
-  
-            File uploadDir = new File(contextPath);
-            File file = File.createTempFile(title, ".jpg", uploadDir);
-            fileName = file.getName();
-            FileOutputStream fos = new FileOutputStream(file);
+		String name = part.getName();
 
-            int data = 0;
-            while ((data = is.read()) != -1) {
-                fos.write(data);
-            }
-            fos.close();
-            file.renameTo(file);
-           
-            }
-        
-            if (fileName == null || fileName.equals("")) {
-    			fileName = "default.jpg";
-    		}
-		Book book = new Book(title, author,fileName, description, genre, linkToBuy);
-		System.out.println(book);
-		
-		try {
-			if (dao.checkBook(title, author) == true) {
-				dao.addBook(book);
-				dao1.bookAddedToUser(email, title, author, fileName);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");
-				request.setAttribute("success", "The book is added!");
-				ArrayList<Book> userBooks = (ArrayList<Book>)request.getSession().getAttribute("userBooks");
-				userBooks.add(book);
-				ArrayList<String> photos = (ArrayList<String>) request.getSession().getAttribute("photos");
-				request.getSession().invalidate();
-				request.getSession().setAttribute("user",user);
-				request.getSession().setAttribute("photos", photos);
-				request.getSession().setAttribute("userBooks", userBooks);
-				dispatcher.forward(request, response);
-			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");
-				request.setAttribute("invalidAdd", "The book is already added!");
-				dispatcher.forward(request, response);
+		String contentType = part.getContentType();
+
+		if (!contentType.contains("image")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");
+			request.setAttribute("errorMessageBook", "You can't add that file as profile picture!");
+			dispatcher.forward(request, response);
+		} else {
+			InputStream is = request.getPart(name).getInputStream();
+
+			// to implement later(geting path from servlet
+
+			String contextPath = "E:\\ProjectFiles\\book_images";
+
+			File uploadDir = new File(contextPath);
+			File file = File.createTempFile(title, ".jpg", uploadDir);
+			fileName = file.getName();
+			FileOutputStream fos = new FileOutputStream(file);
+
+			int data = 0;
+			while ((data = is.read()) != -1) {
+				fos.write(data);
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fos.close();
+			file.renameTo(file);
+			if (fileName == null || fileName.equals("")) {
+				fileName = "default.jpg";
+			}
+			Book book = new Book(title, author, fileName, description, genre, linkToBuy);
+
+			try {
+				if (dao.checkBook(title, author) == true) {
+					dao.addBook(book);
+					dao1.bookAddedToUser(email, title, author, fileName);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");
+					request.setAttribute("success", "The book is added!");
+					ArrayList<Book> userBooks = (ArrayList<Book>) request.getSession().getAttribute("userBooks");
+					userBooks.add(book);
+					ArrayList<String> photos = (ArrayList<String>) request.getSession().getAttribute("photos");
+					request.getSession().invalidate();
+					request.getSession().setAttribute("user", user);
+					request.getSession().setAttribute("photos", photos);
+					request.getSession().setAttribute("userBooks", userBooks);
+					dispatcher.forward(request, response);
+				} else {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("./AddBook.jsp");
+					request.setAttribute("invalidAdd", "The book is already added!");
+					dispatcher.forward(request, response);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+
+		
 	}
 
 }

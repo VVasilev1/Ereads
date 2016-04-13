@@ -18,14 +18,17 @@
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		response.setDateHeader("Expires", -1);
 		if (request.getSession(false).getAttribute("user") == null) {
-			response.sendRedirect("Login.jsp");
-			return;
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./Login.jsp");
+			request.setAttribute("imageMessage", "You must log in to view other users pictures!");
+			dispatcher.forward(request, response);
 		}
 		User user = (User) request.getSession(false).getAttribute("user");
+		User person = (User) request.getSession().getAttribute("person");
 		session.removeAttribute("user");
 		session.setAttribute("user", user);
-		ArrayList<String> photos = (ArrayList<String>) request.getSession().getAttribute("photos");
-		ArrayList<Book> books = (ArrayList<Book>) request.getSession().getAttribute("userBooks");
+		session.setAttribute("person", person);
+		ArrayList<String> photos = (ArrayList<String>) request.getSession().getAttribute("personPictures");
+		ArrayList<Book> books = (ArrayList<Book>) request.getSession().getAttribute("personBooks");
 	%>
 
 	<div id="searchBar">

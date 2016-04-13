@@ -1,6 +1,5 @@
 package bg.ereads.classes;
 
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,22 +21,23 @@ import bg.ereads.dao.IBookDao;
 @WebServlet("/SearchByRadio")
 public class SearchByRadio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getSession().removeAttribute("books");
 		String find = request.getParameter("radio");
 		List<Book> list = new ArrayList<Book>();
 		IBookDao dao = new BookDao();
 		try {
 			list = dao.getBookByGenre(find);
-		}catch (SQLException e ) { 
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("Search", list);
 		request.setAttribute("radio", find);
 		request.setAttribute("searchword", find);
-		
-		//response.sendRedirect("SearchResult");
-		getServletConfig().getServletContext().getRequestDispatcher("/Search.jsp").forward(request,response);
+
+		// response.sendRedirect("SearchResult");
+		getServletConfig().getServletContext().getRequestDispatcher("/Search.jsp").forward(request, response);
 	}
 }

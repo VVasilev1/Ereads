@@ -19,22 +19,21 @@ import bg.ereads.dao.ReviewDao;
 @WebServlet("/ShowComments")
 public class ShowComments extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		Book book = (Book) request.getSession().getAttribute("book");
 		IReviewDao dao = new ReviewDao();
 		List<Review> reviews = null;
 		try {
-			 reviews = dao.getReviews(book.getName(), book.getAutor());
-			 request.getSession().setAttribute("reviews", reviews);
+			reviews = dao.getReviews(book.getName(), book.getAutor());
+			request.getSession().setAttribute("reviews", reviews);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if(reviews == null){
-			System.out.println("prazno eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-		}
+
 		response.sendRedirect("BookInfo.jsp");
-	} 
+	}
 
 }

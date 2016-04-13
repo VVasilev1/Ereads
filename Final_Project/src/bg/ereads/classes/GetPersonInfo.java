@@ -16,8 +16,8 @@ import bg.ereads.dao.PictureDao;
 import bg.ereads.dao.UserBookDao;
 import bg.ereads.dao.UserDao;
 
-@WebServlet("/GetUser")
-public class GetUser extends HttpServlet {
+@WebServlet("/GetPersonInfo")
+public class GetPersonInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,10 +49,9 @@ public class GetUser extends HttpServlet {
 		}
 
 		request.getSession().setAttribute("personBooks", books);
-		request.getSession().setAttribute("personPictures", pictures);
+		request.getSession().setAttribute("personBooks", pictures);
 		request.getSession().setAttribute("person", user);
 		response.sendRedirect("./UserProfile.jsp");
-
 	}
 
 }

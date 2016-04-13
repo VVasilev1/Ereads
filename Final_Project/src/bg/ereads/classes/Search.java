@@ -22,12 +22,9 @@ import bg.ereads.dao.IBookDao;
 @WebServlet("/Search")
 public class Search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
-   
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getSession().removeAttribute("books");
 		String find = request.getParameter("search");
 		String option = request.getParameter("radio");
@@ -35,30 +32,29 @@ public class Search extends HttpServlet {
 		IBookDao dao = new BookDao();
 		try {
 			if (option.equals("name")) {
-			list = dao.getBookByName(find);
+				list = dao.getBookByName(find);
 			}
 			if (option.equals("author")) {
 				list = dao.getBookByAuthor(find);
-				}
+			}
 			if (option.equals("genre")) {
 				list = dao.getBookByGenre(find);
-				}
-		} catch (SQLException e ) { 
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("Search", list);
 		request.setAttribute("radio", option);
 		request.setAttribute("searchword", find);
-		
-		//response.sendRedirect("SearchResult");
-		getServletConfig().getServletContext().getRequestDispatcher("/Search.jsp").forward(request,response);
-		
-		
+
+		// response.sendRedirect("SearchResult");
+		getServletConfig().getServletContext().getRequestDispatcher("/Search.jsp").forward(request, response);
+
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 
 }

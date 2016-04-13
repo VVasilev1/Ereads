@@ -20,64 +20,62 @@ public class TestDao {
 	public void testConnection() {
 		assertNotNull(DBConnection.getInstance().getConn());
 	}
-	
-//	@Test
-//	public void testByTitle () throws SQLException {
-//		BookDao dao = new BookDao();
-//		List<Book> list = dao.getBookByName("j");
-//		for(Book b : list) {
-//			System.out.println(b);
-//		}
-//	}
-//	@Test
-//	public void testByGenre () throws SQLException {
-//		BookDao dao = new BookDao();
-//		List<Book> list = dao.getBookByGenre("tio");
-//		for(Book b : list) {
-//			System.out.println(b);
-//		}
-//	}
-//	
+
 	@Test
-	public void testByAutor () throws SQLException {
+	public void testAdd() throws SQLException {
 		BookDao dao = new BookDao();
-		List<Book> list = dao.getBookByAuthor("ki");
-		for(Book b : list) {
+		dao.addBook(new Book("Java EE", "Niki", "java.jpg", "Good BOok", "Education", "google.bg"));
+	}
+
+	@Test
+	public void testByTitle() throws SQLException {
+		BookDao dao = new BookDao();
+		List<Book> list = dao.getBookByName("j");
+		for (Book b : list) {
 			System.out.println(b);
 		}
 	}
-	
-	
-	
-//	@Test
-//	public void testShowAll() throws SQLException, DBException{
-//		BookDao dao = new BookDao();
-//		List<Book> list = dao.getAllBook();
-//		for(Book b : list) {
-//			System.out.println(b);
-//		}
-//	}
-//	
-//	@Test
-//	public void testUsers() throws SQLException, DBException{
-//		UserDao dao = new UserDao();
-//		List<User> result = dao.getAllUsers();
-//		for(User u : result){
-//			System.out.println(u.geteMail());
-//		}
-//	}
-//	@Test
-//	public void testDelete() throws SQLException {
-//		BookDao dao = new BookDao();
-//		dao.removeBook(new Book("Java","Niki","java.jpg","Good BOok","Education","google.bg"));
-//		
-//	}
-//	
-//	@Test
-//	
-//	public void testAdd() throws SQLException {
-//		BookDao dao = new BookDao();
-//		dao.addBook(new Book("Java","Niki","java.jpg","Good BOok","Education","google.bg"));
-//		
-//	}
+
+	@Test
+	public void testByGenre() throws SQLException {
+		BookDao dao = new BookDao();
+		List<Book> list = dao.getBookByGenre("tio");
+		for (Book b : list) {
+			System.out.println(b);
+		}
+	}
+
+	@Test
+	public void testByAutor() throws SQLException {
+		BookDao dao = new BookDao();
+		List<Book> list = dao.getBookByAuthor("ki");
+		for (Book b : list) {
+			System.out.println(b);
+		}
+	}
+
+	@Test
+	public void testShowAll() throws SQLException, DBException {
+		BookDao dao = new BookDao();
+		List<Book> list = dao.getAllBook();
+		for (Book b : list) {
+			System.out.println(b);
+		}
+	}
+
+	@Test
+	public void testUsers() throws SQLException, DBException {
+		UserDao dao = new UserDao();
+		List<User> result = dao.getAllUsers();
+		for (User u : result) {
+			System.out.println(u.geteMail());
+		}
+	}
+
+	@Test
+	public void testDelete() throws SQLException {
+		BookDao dao = new BookDao();
+		dao.removeBook(new Book("Java EE", "Niki", "java.jpg", "Good BOok", "Education", "google.bg"));
+	}
+
 }

@@ -21,17 +21,21 @@ import bg.ereads.dao.UserDao;
 @WebServlet("/Reg")
 public class Reg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-  
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String firstName = request.getParameter("firstname");
 		String lastName = request.getParameter("lastname");
 		String eMail = request.getParameter("email");
 		String password = request.getParameter("password");
+		firstName = firstName.trim();
+		lastName = lastName.trim();
 		String hashPassword = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
-		if (password.length() <6) {
+		if (password.length() < 6) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("./Register.jsp");
 			request.setAttribute("passwordError", "Password must me atleat 6 characters long.");
 			dispatcher.forward(request, response);

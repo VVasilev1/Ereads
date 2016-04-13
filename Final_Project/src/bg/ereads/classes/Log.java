@@ -1,6 +1,5 @@
 package bg.ereads.classes;
 
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
@@ -30,8 +29,9 @@ import bg.ereads.exceptions.InvalidUserException;
 @WebServlet("/Log")
 public class Log extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-  
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		IUserDao dao = UserDao.getInstance();
@@ -41,21 +41,20 @@ public class Log extends HttpServlet {
 		User user;
 		try {
 			user = dao.loginUser(email, hashPassword);
-			System.out.println(user.geteMail());
-			if (user.geteMail()!=null) {
-			ArrayList<String> pictures = dao2.photos(email);
-			ArrayList<Book> books = dao3.bookToUser(email);
-			request.getSession().setAttribute("photos", pictures);
-			request.getSession().setAttribute("userBooks", books);
-			request.getSession().setAttribute("user", user);
-			response.sendRedirect("Profile2.jsp");
+
+			if (user.geteMail() != null) {
+				ArrayList<String> pictures = dao2.photos(email);
+				ArrayList<Book> books = dao3.bookToUser(email);
+				request.getSession().setAttribute("photos", pictures);
+				request.getSession().setAttribute("userBooks", books);
+				request.getSession().setAttribute("user", user);
+				response.sendRedirect("Profile2.jsp");
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("./Login.jsp");
 				request.setAttribute("errorMessage", "Invalid E-mail or password!");
 				dispatcher.forward(request, response);
 			}
-			
-			
+
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		} catch (DBException e) {
@@ -65,7 +64,7 @@ public class Log extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

@@ -20,13 +20,14 @@ import bg.ereads.dao.IBookDao;
 @WebServlet("/AddReview")
 public class AddReview extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		IBookDao dao = new BookDao();
 		Book book = (Book) request.getSession().getAttribute("book");
 		User user = (User) request.getSession().getAttribute("user");
 		ArrayList<String> photos = (ArrayList<String>) request.getSession().getAttribute("photos");
-		ArrayList<Book> userBooks = (ArrayList<Book>)request.getSession().getAttribute("userBooks");
+		ArrayList<Book> userBooks = (ArrayList<Book>) request.getSession().getAttribute("userBooks");
 		String title = book.getName();
 		String author = book.getAutor();
 		String review = request.getParameter("review");
@@ -35,13 +36,13 @@ public class AddReview extends HttpServlet {
 			dao.reviewBook(title, author, review, mail);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("./BookInfo.jsp");
 			request.getSession().invalidate();
-		    request.getSession().setAttribute("user",user);
-		    request.getSession().setAttribute("book",book);
-		    request.getSession().setAttribute("photos", photos);
-		    request.getSession().setAttribute("userBooks", userBooks);
-		    response.sendRedirect("./ShowComments");
-			
-			//dispatcher.forward(request, response);
+			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute("book", book);
+			request.getSession().setAttribute("photos", photos);
+			request.getSession().setAttribute("userBooks", userBooks);
+			response.sendRedirect("./ShowComments");
+
+			// dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
